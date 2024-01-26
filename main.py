@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 
-
 def find_roots(coefficients):
     a, b, c = coefficients
     # Calculate the discriminant
@@ -24,20 +23,16 @@ def find_roots(coefficients):
 
 
 def process_excel(input_file, output_file):
-    # Read Excel file
     df = pd.read_excel(input_file)
 
-    # Extract coefficients from columns A, B, C
     coefficients = df[['a', 'b', 'c']].values
 
-    # Find roots for each row
     df['Roots'] = df.apply(lambda row: find_roots(row[['a', 'b', 'c']]), axis=1)
 
-    # Write the results to a new Excel file
     df.to_excel(output_file, index=False)
 
 if __name__ == "__main__":
-    input_file = "input_data.xlsx"  # Replace with your input Excel file
-    output_file = "output_data.xlsx"  # Replace with your desired output Excel file
+    input_file = "input_data.xlsx"
+    output_file = "output_data.xlsx"
 
     process_excel(input_file, output_file)
